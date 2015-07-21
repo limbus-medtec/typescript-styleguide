@@ -1,6 +1,6 @@
 # TypeScript Style Guide
 
-This is the TypeScript style guide that we use internally at Platypi! It is *semi-reasonable*, but it's more important that we keep a consistent look/feel of our code.
+This is the TypeScript style guide used by Limbus Medtec. It has been forked from Platypi!
 
 
 ## Table of Contents
@@ -56,14 +56,13 @@ When developing software as an organization, the value of the software produced 
 
 ## Files
   - All TypeScript files must have a ".ts" extension.
-  - They should be all lower case, and only include letters, numbers, and periods. 
-  - It is OK (even recommended) to separate words with periods (e.g. `my.view.html`).
+  - They should be all pascal case, and only include letters, numbers, and periods.
   - All files should end in a new line. This is necessary for some Unix systems.
 
 **[top](#table-of-contents)**
 
 ## Indentation
-  - The unit of indentation is four spaces. 
+  - The unit of indentation is two spaces. 
   - **Never use tabs**, as this can lead to trouble when opening files in different IDEs/Text editors. Most text editors have a configuration option to change tabs to spaces.
 
 **[top](#table-of-contents)**
@@ -75,29 +74,29 @@ When developing software as an organization, the value of the software produced 
 **[top](#table-of-contents)**
 
 ## Quotes
-  - Use single-quotes `''` for all strings, and use double-quotes `""` for strings within strings.
+  - Use double-quotes `""` for all strings, and use single-quotes `''` for strings within strings. This is more in line with     Java style and facilitates working between front-end and back-end.
 
   ```typescript
   // bad
-  var greeting = "Hello World!";
-  
-  // good
   var greeting = 'Hello World!';
   
-  // bad
-  var html = "<div class='bold'>Hello World</div>";
+  // good
+  var greeting = "Hello World!";
   
   // bad
-  var html = '<div class=\'bold\'>Hello World</div>';
+  var html = '<div class="bold">Hello World</div>';
+  
+  // bad
+  var html = "<div class=\"bold\">Hello World</div>";
   
   // good
-  var html = '<div class="bold">Hello World</div>';
+  var html = "<div class='bold'>Hello World</div>";
   ```
 
 **[top](#table-of-contents)**
 
 ## Comments
-  - Comments are strongly encouraged. It is very useful to be able to read comments and understand the intentions of a given block of code. 
+  - Comments are encouraged. It is very useful to be able to read comments and understand the intentions of a given block of code. 
   - Comments need to be clear, just like the code they are annotating. 
   - Make sure your comments are meaningful. 
 
@@ -106,21 +105,6 @@ The following example is a case where a comment is completely erroneous, and can
   ```typescript
   // Set index to zero.
   var index = 0;
-  ```
-    
-  - All public functions must have a comment block `/**...*/` using [JSDoc](http://usejsdoc.org/) style comments. 
-
-JSDocs can be interpreted by IDEs for better intellisense. Below is an example of a JSDoc comment block for a function.
-
-  ```typescript
-  /**
-   * Takes in a name and returns a greeting string.
-   * 
-   * @param name The name of the greeted person.
-   */
-  function getGreeting(name: string): string {
-      return 'Hello ' + name + '!';
-  }
   ```
 
 ### Class
