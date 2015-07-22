@@ -56,7 +56,7 @@ When developing software as an organization, the value of the software produced 
 
 ## Files
   - All TypeScript files must have a ".ts" extension.
-  - They should be all pascal case, and only include letters, numbers, and periods.
+  - They should be all UpperCamelCase (PascalCase), and only include letters, numbers, and periods.
   - All files should end in a new line. This is necessary for some Unix systems.
 
 **[top](#table-of-contents)**
@@ -109,45 +109,25 @@ The following example is a case where a comment is completely erroneous, and can
 
 ### Class
 
-  - All classes must have block comments `/**...*/` for all public variables and functions. 
-  - All public functions should use [JSDoc](http://usejsdoc.org/) style comments. 
-  - Functions need to have a comment explaining what the function does, and all of the input parameters need to be annotated with `@param`. 
-  - The class should include a block comment containing the description of the class
-  - The constructor should contain a JSDoc comment annotating any input parameters.
+  - On top, all class should include a block `/**...*/` comment containing the licens description.
+  - Following the imports, all class should include a block `/**...*/` comment containing the description of the class and the author.
 
   ```typescript
   /**
-   * Contains properties of a Person.
-   */
-  class Person {
-      /**
-       * Returns a new Person with the specified name.
-       * 
-       * @param name The name of the new Person.
-       */
-      static GetPerson(name: string): Person {
-          return new Person(name);
-      }
-      
-      /**
-       * @param name The name of the new Person.
-       */
-      constructor(public name: string) { }
+ * (c) Copyright 2015, Limbus GmbH
+ *
+ * All rights reserved.
+ */
+ 
+ import BasePerson = require("path/to/BasePerson");
 
-      /**
-       * Instructs this Person to walk for a certain amount 
-       * of time.
-       *
-       * @param millis The number of milliseconds the Person 
-       * should walk.
-       */
-      walkFor(millis: number) {
-          console.log(this.name + ' is now walking.');
-          
-          setTimeout(() => {
-              console.log(this.name + ' has stopped walking.');
-          }, millis);
-      }
+  /**
+   * Contains properties of a Person.
+   *
+   * @author First Last
+   */
+  class Person extends BasePerson {
+    
   }
   ```
 
@@ -159,7 +139,6 @@ The following example is a case where a comment is completely erroneous, and can
   - Use `//` for all inline comments. 
   - Keep comments clear and concise. 
   - Place inline comments on a newline above the line they are annotating
-  - Put an empty line before the comment.
 
   ```typescript
   // bad
@@ -177,27 +156,17 @@ The following example is a case where a comment is completely erroneous, and can
           console.log(name + ' has stopped walking.');
       }, millis);
   }
-  
-  // good
-  function walkFor(name: string, millis: number) {
-      console.log(name + ' is now walking.');
-      
-      // Wait for millis milliseconds to stop walking
-      setTimeout(() => {
-          console.log(name + ' has stopped walking.');
-      }, millis);
-  }
   ```
 
 **[top](#table-of-contents)**
 
-### Todo and XXX
+### Todo and FIXME
 
-`TODO` and `XXX` annotations help you quickly find things that need to be fixed/implemented. 
+`TODO` and `FIXME` annotations help you quickly find things that need to be fixed/implemented. 
 
   - Use `// TODO:` to annotate solutions that need to be implemented. 
-  - Use `// XXX:` to annotate problems the need to be fixed. 
-  - It is best to write code that doesn't need `TODO` and `XXX` annotations, but sometimes it is unavoidable. 
+  - Use `// FIXME:` to annotate problems the need to be fixed. 
+  - It is best to write code that doesn't need `TODO` and `FIXME` annotations, but sometimes it is unavoidable. 
 
 **[top](#table-of-contents)**
 
@@ -209,12 +178,12 @@ The following example is a case where a comment is completely erroneous, and can
   // bad
   console.log(a + b);
 
-  var a = 2,
-      b = 4;
+  var a = 2;
+  var b = 4;
 
   // good
-  var a = 2,
-      b = 4;
+  var a = 2;
+  var b = 4;
       
   console.log(a + b);
   ```
@@ -232,19 +201,19 @@ The following example is a case where a comment is completely erroneous, and can
   }
   ```
 
-  - Use one `var` keyword to define a block of variables.
+  - Use a `var` keyword for each defined variable.
   - Declare each variable on a newline.
   
   ```typescript
   // bad
-  var a = 2;
-  var b = 2;
-  var c = 4;
-
-  // good
   var a = 2,
       b = 2,
       c = 4;
+
+  // good
+  var a = 2;
+  var b = 2;
+  var c = 4;
   
   // bad
   // b will be defined on global scope.
@@ -295,7 +264,7 @@ The following example is a case where a comment is completely erroneous, and can
   }
   ```
 
-  - The body of the function should be indented 4 spaces.
+  - The body of the function should be indented 2 spaces.
   - The right curly brace `}` should be on a new line.
   - The right curly brace `}` should be aligned with the line containing the left curly brace `{` that begins the function statement.
   
@@ -372,7 +341,7 @@ The following example is a case where a comment is completely erroneous, and can
   });
   ```
 
-  - The statement body should be indented 4 spaces.
+  - The statement body should be indented 2 spaces.
   - The right curly brace `}` should be on a new line.
   - The right curly brace `}` should be aligned with the line containing the  left curly brace `{` that begins the function statement.
 
@@ -413,44 +382,17 @@ The following example is a case where a comment is completely erroneous, and can
 ### Classes
 
   - Classes/Constructors should use UpperCamelCase (PascalCase).
-  - `Private` and `private static` members in classes should be denoted with the `private` keyword.
-  - `Private` and `private static` members should be prefaced with 2 underscores `__`.
-  - `Protected` members in classes do not use the `private` keyword.
-  - `Protected` members in classes should be prefaced with 1 underscore `_`.
-
-  ```typescript
-  class Person {
-      private __fullName: string;
-      
-      constructor(public firstName: string, public lastName: string) {
-          this.__fullName = firstName + ' ' + lastName;
-      }
-      
-      _walkFor(millis: number) {
-          console.log(this.__fullName + ' is now walking.');
-          
-          // Wait for millis milliseconds to stop walking
-          setTimeout(() => {
-              console.log(this.__fullName + ' has stopped walking.');
-          }, millis);
-      }
-      
-      toString() {
-          return this.__fullName;
-      }
-  }
-  ```
+  - All memebers of a class should be annotated with an access modifier (`private`, `protected`, or `public`).
 
 **[top](#table-of-contents)**
 
 ### Interfaces
 
   - Interfaces should use UpperCamelCase.
-  - Interfaces should be prefaced with the capital letter I.
-  - Only `public` members should be in an interface, leave out `protected` and `private` members.
+  - Only `public` members should be in an interface, leave out `protected` and `private` members. Hence, interface members       should not use access modifiers.
   
   ```typescript
-  interface IPerson {
+  interface Person {
       firstName: string;
       lastName: string;
       toString(): string;
@@ -491,7 +433,7 @@ The following example is a case where a comment is completely erroneous, and can
 Compound statements are statements containing lists of statements enclosed in curly braces `{}`.
 
   - The enclosed statements should start on a newline.
-  - The enclosed statements should be indented 4 spaces.
+  - The enclosed statements should be indented 2 spaces.
 
   ```typescript
   // bad
@@ -589,7 +531,7 @@ It appears the intention of the above code is to return if `condition === true`,
   }
   ```
 
-  - Always **explicitly define a return type**. This can help TypeScript validate that you are always returning something that matches the correct type.
+  - It is recommended to **explicitly define a return type**. This can help TypeScript validate that you are always returning something that matches the correct type.
 
   ```typescript
   // bad
