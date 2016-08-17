@@ -345,7 +345,7 @@ The following example is a case where a comment is completely erroneous, and can
   - The right curly brace `}` should be on a new line.
   - The right curly brace `}` should be aligned with the line containing the  left curly brace `{` that begins the function statement.
 
-**[top](#table-of-contents)**
+**[top](#table-of-contents)**C
 
 ## Names
 
@@ -383,6 +383,7 @@ The following example is a case where a comment is completely erroneous, and can
 
   - Classes/Constructors should use UpperCamelCase (PascalCase).
   - All memebers of a class should be annotated with an access modifier (`private`, `protected`, or `public`).
+  - As a rule of thumb, each class should be defined in its own file that has the same name as the class.
 
 **[top](#table-of-contents)**
 
@@ -390,6 +391,7 @@ The following example is a case where a comment is completely erroneous, and can
 
   - Interfaces should use UpperCamelCase.
   - Only `public` members should be in an interface, leave out `protected` and `private` members. Hence, interface members       should not use access modifiers.
+  - - As a rule of thumb, each interface should be defined in its own file that has the same name as the class.
   
   ```typescript
   interface Person {
