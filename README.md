@@ -804,6 +804,69 @@ Blank lines improve code readability by allowing the developer to logically grou
 
 **[top](#table-of-contents)**
 
+## Rules for AngularJS
+
+AngularJS is used as front-end framework.
+
+###	Folder Structure
+
+The angular folder structure should resemble the structure below:
+angular/ 
+----- my-component/
+---------- MyComponentController.ts
+---------- MyComponentTemplate.ts
+---------- MyComponentConstants.ts 
+----- my-directive/
+---------- MyDirective.ts 
+----- my-other-directive/
+---------- OtherDirective.ts 
+----- shared/ 
+-----------config/
+--------------- MyConfig.ts
+---------- my-services/
+--------------- MyService.ts 
+---------- my-other-services/
+--------------- MyOtherService.ts
+--------- typings/
+--------------- typing.d.ts
+
+###	One component per file
+Each service, controller, and directive should be defined in an own class and file. Each component class should comontain a static ID comprising the identifier for angular's dependency injection.
+
+###	Avoid injecting scopes
+$scope and $rootScope should not be injected and used, if possible. Use the controllerAs syntax for data binding. Per default the controller name should be referenced with “$ctrl”. 
+
+###	Bindable members public
+All bindable members of a controller should have the public access modifier.
+
+###	Defer controller logic to services 
+
+###	Directives
+
+-	Declaration restrictions: Only use custom element and custom attribute methods for declaring your Directives ({ restrict: 'EA' }) depending on the Directive's role. Comment and class name declarations are confusing and should be avoided. Comments do not play nicely with older versions of IE. Using an attribute is the safest method for browser coverage.
+-	Templating: Use string templates for clean templating to improve readability as code can be indented properly. This also avoids the + operator which is less clean and can lead to errors if used incorrectly to split lines. Furthermore, variables can be referenced with the ${myVariable} syntax.
+
+```
+// avoid 
+class someDirective {  
+template:   '<div class="' + classVariable + '">' + 
+'<h1>My directive</h1>' + 
+'</div>' 
+} 
+
+// recommended 
+class someDirective { 
+template: `div class="${classVariable}">
+ <h1>My directive</h1>
+     </div>`
+}
+```
+
+-	DOM manipulation: Takes place only inside Directives, never a service. Note, that service can provide methods for DOM manipulation that are used in directives.
+-	Directives and Filters are the only providers that have the first letter as lowercase; this is due to strict naming conventions in Directives. Angular hyphenates camelCase, so dragUpload will become <div drag-upload></div> when used on an element.
+-	controllerAs: Use the controllerAs syntax inside Directives
+
+
 ## TSLint
 
   - Always use a Linter
